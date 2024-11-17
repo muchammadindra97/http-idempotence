@@ -18,6 +18,6 @@ def create_app():
             'message': 'Database initialized'
         })
 
-    # app.register_blueprint(services.banking.bp)
+    app.register_blueprint(services.banking.bp)
 
     return app
