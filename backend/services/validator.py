@@ -1,3 +1,5 @@
+from backend.services.database import get_db
+
 def run_rule(value: str, rule: str) -> bool:
     if rule == 'required':
         return value != '' and value is not None
@@ -6,6 +8,8 @@ def run_rule(value: str, rule: str) -> bool:
     elif 'min' in rule:
         number = int(rule.split(':')[1])
         return int(value) >= number
+    elif rule == 'idempotence':
+        return not is_idempotence_key_used(value)
     else:
         return True
 
@@ -17,6 +21,8 @@ def get_message(key: str, rule: str) -> str:
     elif 'min' in rule:
         number = int(rule.split(':')[1])
         return f'field {key} must be greater than {number}'
+    elif rule == 'idempotence':
+        return f'field {key} is already processed'
     else:
         return ''
 
@@ -43,3 +49,8 @@ def validate(data: dict, rules: dict[str, list[str]]) -> dict:
         result.pop('validated')
 
     return result
+
+def is_idempotence_key_used(key: str) -> bool:
+    expiry = '1 minutes'
+    db = get_db().cursor()
+    return db.execute(f"SELECT key FROM idempotence_key WHERE key = '{key}' AND time >= DATETIME('now', '-{expiry}')").fetchone() is not None
