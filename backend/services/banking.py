@@ -55,9 +55,9 @@ def withdraw():
         return responser.validation_error(validation['errors'])
 
     amount = validation['validated']['amount']
-    balance = get_balance()
+    curr_balance = get_balance()
 
-    if amount > balance:
+    if amount > curr_balance:
         return responser.basic('Balance insufficient', 400)
 
     db = get_db().cursor()
@@ -86,10 +86,10 @@ def history():
 
 @bp.get('/balance')
 def balance():
-    balance = get_balance()
+    amount = get_balance()
 
     return responser.resources({
-        'balance': balance
+        'balance': amount
     })
 
 def get_balance():
