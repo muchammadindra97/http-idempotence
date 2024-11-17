@@ -8,7 +8,7 @@
 	},
 	"item": [
 		{
-			"name": "Deposit Money",
+			"name": "Deposit",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -45,7 +45,10 @@
 			"response": []
 		},
 		{
-			"name": "Withdraw Money",
+			"name": "Withdraw",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
 			"request": {
 				"method": "POST",
 				"header": [
@@ -99,6 +102,52 @@
 					],
 					"path": [
 						"history"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Balance",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{API}}/balance",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"balance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Init Database",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{API}}/init-db",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"init-db"
 					]
 				}
 			},
