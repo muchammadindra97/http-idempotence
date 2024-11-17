@@ -1,6 +1,6 @@
 def run_rule(value: str, rule: str) -> bool:
     if rule == 'required':
-        return rule != '' and rule is not None
+        return value != '' and value is not None
     elif rule == 'number':
         return run_rule(value, 'required') and value.isdigit()
     elif 'min' in rule:
@@ -33,7 +33,7 @@ def validate(data: dict, rules: dict[str, list[str]]) -> dict:
             if not is_valid:
                 message = get_message(key, rule)
                 result['errors'][key] = message
-                continue
+                break
             result['validated'][key] = value
 
     result['is_valid'] = len(result['errors']) <= 0
