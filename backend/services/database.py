@@ -22,5 +22,5 @@ def register_db(app: Flask):
 
 def init_db():
     db = get_db()
-    db.execute("CREATE TABLE IF NOT EXISTS account(id INTEGER PRIMARY KEY, amount INTEGER, action TEXT, time TIMESTAMP)")
-    db.execute("CREATE TABLE IF NOT EXISTS idempotence_key(id INTEGER PRIMARY KEY, key TEXT, time TIMESTAMP)")
+    db.execute("CREATE TABLE IF NOT EXISTS account(id INTEGER PRIMARY KEY, amount INTEGER, action TEXT, time TEXT)")
+    db.execute("CREATE TABLE IF NOT EXISTS idempotence_key(id INTEGER PRIMARY KEY, key TEXT, time TEXT)")
