@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 import services.database
 import services.banking
 
@@ -8,6 +9,8 @@ def create_app():
         SECRET_KEY='dev',
         DATABASE='./flaskr.sqlite',
     )
+
+    CORS(app)
 
     services.database.register_db(app)
 
