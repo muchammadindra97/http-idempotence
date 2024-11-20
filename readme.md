@@ -37,3 +37,6 @@ App to simulate Idempotency is available made with Python Flask (as backend) and
 2. Install dependencies by `npm install`
 3. Run development app by `npm run dev`
 4. App will be started at `localhost:5173`
+
+### Screenshot
+![img.png](demo_app.png)
