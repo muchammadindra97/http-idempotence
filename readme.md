@@ -21,3 +21,19 @@ The DELETE method is idempotence as long as the delete operation is having an id
 1. Server then will save the result of the operation on first completed request, identified by given idempotency key.
 1. The key may be saved by the server on configured period, then it could be pruned afterward.
 1. Any subsequent requests with the same key will return the same result, or resulting some kind of error to the client (e.g. error code 409).
+
+## Example App
+App to simulate Idempotency is available made with Python Flask (as backend) and Svelte (as frontend).
+
+### Backend
+1. Made using Python v3.12+
+2. Install dependencies by `pip install -r requirements.txt`
+3. Run development server by `flask --app server run`
+4. App will be started at `localhost:5000`
+5. Hit HTTP endpoint `/init-db` to initialize SQLite database
+
+### Frontend
+1. Made using NodeJS v18+
+2. Install dependencies by `npm install`
+3. Run development app by `npm run dev`
+4. App will be started at `localhost:5173`
