@@ -30,7 +30,8 @@ def validate(data: dict, rules: dict[str, list[str]]) -> dict:
     result = {
         'is_valid': False,
         'validated': dict(),
-        'errors': dict()
+        'errors': dict(),
+        'violated_rule': dict()
     }
     for key in rules.keys():
         value = data.get(key)
@@ -39,12 +40,14 @@ def validate(data: dict, rules: dict[str, list[str]]) -> dict:
             if not is_valid:
                 message = get_message(key, rule)
                 result['errors'][key] = message
+                result['violated_rule'][key] = rule
                 break
             result['validated'][key] = value
 
     result['is_valid'] = len(result['errors']) <= 0
     if result['is_valid']:
         result.pop('errors')
+        result.pop('violated_rule')
     else:
         result.pop('validated')
 

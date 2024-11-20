@@ -14,7 +14,10 @@ def deposit():
     })
 
     if not headers_validation['is_valid']:
-        return responser.validation_error(headers_validation['errors'], 'Please check your headers', 409)
+        code = 400
+        if headers_validation['violated_rule'].get('Idempotency-Key') is 'idempotence':
+            code = 409
+        return responser.validation_error(headers_validation['errors'], 'Please check your headers', code)
 
     idempotency_key = headers_validation['validated']['Idempotency-Key']
 
@@ -43,7 +46,10 @@ def withdraw():
     })
 
     if not headers_validation['is_valid']:
-        return responser.validation_error(headers_validation['errors'], 'Please check your headers', 409)
+        code = 400
+        if headers_validation['violated_rule'].get('Idempotency-Key') is 'idempotence':
+            code = 409
+        return responser.validation_error(headers_validation['errors'], 'Please check your headers', code)
 
     idempotency_key = headers_validation['validated']['Idempotency-Key']
 
